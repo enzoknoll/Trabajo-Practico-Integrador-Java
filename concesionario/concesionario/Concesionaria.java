@@ -1,0 +1,103 @@
+package concesionario;
+
+import concesionario.exceptions.*;
+import java.util.ArrayList;
+import java.util.OptionalInt;
+import java.util.stream.IntStream;
+
+public class Concesionaria {
+
+    private ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
+
+    public void agregarVehiculo(Vehiculo nuevoVehiculo) {
+        try {
+            if (listaVehiculos == null) {
+                throw new NullPointerException("La lista no está inicializada.");
+            }
+            if (listaVehiculos.contains(nuevoVehiculo)) {
+                throw new VehiculoDuplicadoException("La patente " + nuevoVehiculo.getPatente() + " ya existe.");
+            }
+            listaVehiculos.add(nuevoVehiculo);
+            System.out.println("Vehículo agregado exitosamente.");
+        } catch (VehiculoDuplicadoException e) {
+            System.out.println("Aviso: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    public void actualizarVehiculo(String patenteBuscada, Vehiculo nuevosDatos) {
+        try {
+            if (listaVehiculos == null) {
+                throw new NullPointerException("La lista de vehiculos no está inicializada.");
+            }
+            OptionalInt indiceEncontrado = IntStream.range(0, listaVehiculos.size())
+                .filter(i -> listaVehiculos.get(i).getPatente().equalsIgnoreCase(patenteBuscada))
+                .findFirst();
+            if (indiceEncontrado.isPresent()) {
+                int indice = indiceEncontrado.getAsInt();
+                Vehiculo actual = listaVehiculos.get(indice);
+                if (!nuevosDatos.getPatente().equalsIgnoreCase(actual.getPatente()) 
+                    && listaVehiculos.contains(nuevosDatos)) {
+                      throw new IllegalArgumentException("No se puede actualizar: La nueva patente ya existe en otro vehículo.");
+                }
+                listaVehiculos.set(indice, nuevosDatos);
+                System.out.println("Éxito: Vehículo con patente " + patenteBuscada + " actualizado.");
+
+            } else {
+                throw new IllegalArgumentException("No se pudo actualizar: Patente " + patenteBuscada + " no encontrada.");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error de actualización: " + e.getMessage());
+        } catch (NullPointerException e) {
+            System.out.println("Error grave: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error inesperado: " + e.getMessage());
+        }
+    }
+
+    public void buscarVehiculo(String patenteBuscada) {
+        try {
+            if (listaVehiculos == null) {
+                throw new NullPointerException("La lista no está inicializada.");
+            }
+            boolean encontrada = false;
+            for (Vehiculo v : listaVehiculos) {
+                if (v.getPatente().equalsIgnoreCase(patenteBuscada)) {
+                    System.out.println("---------------------------");
+                    System.out.println("¡VEHÍCULO ENCONTRADO!");
+                    System.out.println(v.toString()); 
+                    System.out.println("---------------------------");
+                    encontrada = true;
+                    break;
+                }
+            }
+            if (!encontrada) {
+                System.out.println("No se encontró ningún vehículo con la patente: " + patenteBuscada);
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Error grave: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Ocurrió un error inesperado al buscar: " + e.getMessage());
+        }
+    }
+
+    public void eliminarVehiculo(String patente) {
+        try {
+            if (listaVehiculos == null) {
+                throw new NullPointerException("La lista no está inicializada.");
+            }
+            boolean fueEliminado = listaVehiculos.removeIf(v -> v.getPatente().equalsIgnoreCase(patente));
+            if (!fueEliminado) {
+                throw new IllegalArgumentException("No se encontró ningún vehículo con la patente: " + patente);
+            }
+            System.out.println("Éxito: Vehículo con patente " + patente + " eliminado.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Aviso: " + e.getMessage());
+        } catch (NullPointerException e) {
+            System.out.println("Error grave: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error inesperado: " + e.getMessage());
+        }
+    }
+}
