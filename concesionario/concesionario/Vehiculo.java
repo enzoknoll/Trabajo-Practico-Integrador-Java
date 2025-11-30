@@ -6,6 +6,7 @@ public class Vehiculo {
     private int anio;
     private boolean condicionNuevo;
     private String color;
+    private String patente; // aunque no se especifique en el TPI, se agrega el atributo patente para sobreescribir el metodo equals
     
 
     public Vehiculo(String marca, String modelo, int anio, boolean condicionNuevo, String color) {
@@ -34,6 +35,20 @@ public class Vehiculo {
 
     public String getColor() {
         return color;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || !(o instanceof Vehiculo))
+            return false;
+        Vehiculo vehiculo = (Vehiculo) o;
+        return patente.equals(vehiculo.patente);
+    }
+    @Override
+    public int hashCode() {
+        return patente.hashCode();
     }
 
 }
