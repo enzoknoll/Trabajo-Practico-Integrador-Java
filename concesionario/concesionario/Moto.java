@@ -1,3 +1,4 @@
+package concesionario;
 public class Moto extends Vehiculo {
     private String tipoMoto;
     public Moto(String marca, String modelo, int anio, boolean condicionNuevo, String color, String tipoMoto) {
