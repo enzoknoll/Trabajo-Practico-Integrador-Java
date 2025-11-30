@@ -1,7 +1,7 @@
 package concesionario;
 
 //import concesionario.exceptions.*;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 public class Auto extends Vehiculo {
     private String tipoCarroceria;
