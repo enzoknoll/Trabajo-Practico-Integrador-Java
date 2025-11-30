@@ -37,19 +37,22 @@ public abstract class Vehiculo {
     public String getColor() {
         return color;
     }
+    public String getPatente() {
+        return patente;
+    }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || !(o instanceof Vehiculo))
-            return false;
+        if (this == o) return true;
+        if (o == null || !(o instanceof Vehiculo)) return false;
+        
         Vehiculo vehiculo = (Vehiculo) o;
-        return patente.equals(vehiculo.patente);
+        return patente.equalsIgnoreCase(vehiculo.patente);
     }
+
     @Override
     public int hashCode() {
-        return patente.hashCode();
+        return patente.toUpperCase().hashCode();
     }
 
 }
