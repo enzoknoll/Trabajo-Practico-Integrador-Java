@@ -1,13 +1,12 @@
 package concesionario;
 
 import java.util.Scanner;
-import concesionario.*;
 
 public class Main {
     public static void main(String[] args) {
         
         // 1. Instanciamos la clase que tiene la lógica (la "Gestora")
-        Concesionaria concesionaria = new Concesionaria();
+        Concesionaria vehiculo = new Concesionaria();
 
         Scanner scanner = new Scanner(System.in);
 
@@ -39,23 +38,23 @@ public class Main {
         // Fíjate que el método pide 'Vehiculo', pero le pasamos 'Auto', 'Moto', etc.
         // Esto se llama POLIMORFISMO. Funciona solo.
         System.out.println("--- AGREGANDO VEHÍCULOS ---");
-        concesionaria.agregarVehiculo(miAuto);
-        concesionaria.agregarVehiculo(miAuto2);
-        concesionaria.agregarVehiculo(miAuto3);
-        concesionaria.agregarVehiculo(miAuto4);
-        concesionaria.agregarVehiculo(miMoto);
-        concesionaria.agregarVehiculo(miMoto2);
-        concesionaria.agregarVehiculo(miMoto3);
-        concesionaria.agregarVehiculo(miMoto4);        
-        concesionaria.agregarVehiculo(miCamioneta);
-        concesionaria.agregarVehiculo(miCamioneta2);
-        concesionaria.agregarVehiculo(miCamioneta3);
-        concesionaria.agregarVehiculo(miCamioneta4);
+        vehiculo.agregarVehiculo(miAuto);
+        vehiculo.agregarVehiculo(miAuto2);
+        vehiculo.agregarVehiculo(miAuto3);
+        vehiculo.agregarVehiculo(miAuto4);
+        vehiculo.agregarVehiculo(miMoto);
+        vehiculo.agregarVehiculo(miMoto2);
+        vehiculo.agregarVehiculo(miMoto3);
+        vehiculo.agregarVehiculo(miMoto4);        
+        vehiculo.agregarVehiculo(miCamioneta);
+        vehiculo.agregarVehiculo(miCamioneta2);
+        vehiculo.agregarVehiculo(miCamioneta3);
+        vehiculo.agregarVehiculo(miCamioneta4);
 
         // B) BUSCAR (READ)
         System.out.println("\n--- BUSCANDO ---");
-        concesionaria.buscarVehiculo("AA111BB"); // Busca el auto
-        concesionaria.buscarVehiculo("MOTO999"); // Busca la moto
+        vehiculo.buscarVehiculo("AA111BB"); // Busca el auto
+        vehiculo.buscarVehiculo("MOTO999"); // Busca la moto
 
         // C) ACTUALIZAR (UPDATE)
         System.out.println("\n--- ACTUALIZANDO ---");
@@ -63,19 +62,17 @@ public class Main {
         // OJO: Debe ser del mismo tipo (Si era Moto, pasas una Moto nueva)
         Moto motoActualizada = new Moto("Honda", "CBR Fireblade", 2024, true, "Azul", "MOTO999", "Super Sport");
         
-        concesionaria.actualizarVehiculo("MOTO999", motoActualizada);
+        vehiculo.actualizarVehiculo("MOTO999", motoActualizada);
         
         // Verificamos el cambio buscando de nuevo
-        concesionaria.buscarVehiculo("MOTO999");
+        vehiculo.buscarVehiculo("MOTO999");
 
         // D) ELIMINAR (DELETE)
         System.out.println("\n--- ELIMINANDO ---");
-        concesionaria.eliminarVehiculo("CC222DD"); // Borramos la camioneta
+        vehiculo.eliminarVehiculo("CC222DD"); // Borramos la camioneta
         
         // Intentamos buscarla para confirmar que ya no está
-        concesionaria.buscarVehiculo("CC222DD");
-
-        Concesionaria vehiculo = new Concesionaria();
+        vehiculo.buscarVehiculo("CC222DD");
 
         while (true){
             Menu.mostrarMenu();
