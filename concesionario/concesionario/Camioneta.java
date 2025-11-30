@@ -108,15 +108,32 @@ public class Camioneta extends Vehiculo {
 //        }
 //    }
 
+    //@Override
+    //public String toString() {
+    //    return "Camioneta{" +
+    //            "marca='" + getMarca() + '\'' +
+    //            ", modelo='" + getModelo() + '\'' +
+    //            ", anio=" + getAnio() +
+    //            ", condicionNuevo=" + esNuevo() +
+    //            ", color='" + getColor() + '\'' +
+    //            ", tipoCarroceria='" + tipoCarroceria + '\'' +
+    //            '}';
+    //}
+
     @Override
     public String toString() {
-        return "Camioneta{" +
-                "marca='" + getMarca() + '\'' +
-                ", modelo='" + getModelo() + '\'' +
-                ", anio=" + getAnio() +
-                ", condicionNuevo=" + esNuevo() +
-                ", color='" + getColor() + '\'' +
-                ", tipoCarroceria='" + tipoCarroceria + '\'' +
-                '}';
+        String linea = " patente: " + getPatente() +
+                   " | Año: " + getAnio() +
+                   " | Marca: " + getMarca() +
+                   " | Modelo: " + getModelo() +
+                   " | Color: " + getColor() +
+                   " | Condición: " + (esNuevo() ? "0 KM" : "Usado") +
+                   " | Tipo de carrocería: " + tipoCarroceria + " ";
+
+        String borde = "═".repeat(linea.length());
+
+        return "╔" + borde + "╗\n" +
+               "║" + linea + "║\n" +
+               "╚" + borde + "╝";
     }
 }

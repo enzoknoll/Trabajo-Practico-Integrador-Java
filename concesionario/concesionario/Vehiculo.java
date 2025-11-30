@@ -1,5 +1,7 @@
 package concesionario;
 
+import java.util.Scanner;
+
 public abstract class Vehiculo {
     private String marca;
     private String modelo;

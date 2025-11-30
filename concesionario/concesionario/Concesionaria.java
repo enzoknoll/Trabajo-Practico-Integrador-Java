@@ -3,6 +3,7 @@ package concesionario;
 import concesionario.exceptions.*;
 import java.util.ArrayList;
 import java.util.OptionalInt;
+import java.util.Scanner;
 import java.util.stream.IntStream;
 
 public class Concesionaria {
@@ -98,6 +99,67 @@ public class Concesionaria {
             System.out.println("Error grave: " + e.getMessage());
         } catch (Exception e) {
             System.out.println("Error inesperado: " + e.getMessage());
+        }
+    }
+
+    private static Vehiculo pedirDatosVehiculo(Scanner scanner) {
+        int anio = 0;
+        Menu.mostrarMenuVehiculo();
+        System.out.print("Ingrese un vehiculo nuevo: ");
+        int tipoVehiculo = scanner.nextInt();
+        
+        System.out.print("Ingrese marca del vehiculo: ");
+        String marca = scanner.nextLine();
+
+        System.out.print("Ingrese modelo del vehiculo: ");
+        String modelo = scanner.nextLine();
+
+        while (true) {
+            try {
+                System.out.print("Ingrese año del vehiculo: ");
+                anio = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Ingrese un año válido (solo números).");
+            }
+        }
+
+        System.out.print("El auto es 0 KM? (True/False): ");
+        boolean esNuevo = scanner.nextBoolean();
+
+        System.out.print("Ingrese color del vehiculo: ");
+        String color = scanner.nextLine();
+
+        System.out.print("Ingrese patente del vehiculo: ");
+        String patente = scanner.nextLine().toUpperCase();
+
+        switch (tipoVehiculo){
+            case 1:
+                System.out.print("Ingrese carrocería del auto: ");
+                String carroceria = scanner.nextLine();
+                return new Auto(marca, modelo, anio, esNuevo, color, patente, carroceria);
+            case 2:
+                System.out.print("Ingrese tipo de moto: ");
+                String tipoMoto = scanner.nextLine();
+                return new Moto(marca, modelo, anio, esNuevo, color, patente, tipoMoto);
+            case 3:
+                System.out.print("Ingrese tipo de camioneta: ");
+                String tipoCamioneta = scanner.nextLine();
+                return new Camioneta(marca, modelo, anio, esNuevo, color, patente, tipoCamioneta);
+            default:
+                System.out.println("Tipo de vehículo inválido. Se cancelará la operación.");
+                return null;
+        }
+    }
+
+    public void mostrarVehiculos() {
+        if (listaVehiculos == null || listaVehiculos.isEmpty()) {
+            System.out.println("No hay vehículos registrados.");
+            return;
+        }
+        for (Vehiculo v : listaVehiculos) {
+            System.out.println(v.toString());
+            System.out.println("---------------------------");
         }
     }
 }
