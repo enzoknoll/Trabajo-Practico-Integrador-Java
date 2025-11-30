@@ -1,8 +1,8 @@
 package concesionario;
 public class Moto extends Vehiculo {
     private String tipoMoto;
-    public Moto(String marca, String modelo, int anio, boolean condicionNuevo, String color, String tipoMoto) {
-        super(marca, modelo, anio, condicionNuevo, color);
+    public Moto(String marca, String modelo, int anio, boolean condicionNuevo, String color, String patente, String tipoMoto) {
+        super(marca, modelo, anio, condicionNuevo, color, patente);
         this.tipoMoto = tipoMoto;
     }
     public String getTipoMoto() {

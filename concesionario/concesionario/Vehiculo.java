@@ -9,12 +9,13 @@ public class Vehiculo {
     private String patente; // aunque no se especifique en el TPI, se agrega el atributo patente para sobreescribir el metodo equals
     
 
-    public Vehiculo(String marca, String modelo, int anio, boolean condicionNuevo, String color) {
+    public Vehiculo(String marca, String modelo, int anio, boolean condicionNuevo, String color, String patente) {
         this.marca = marca;
         this.modelo = modelo;
         this.anio = anio;
         this.condicionNuevo = condicionNuevo;
         this.color = color;
+        this.patente = patente;
     }
 
     public String getMarca() {
