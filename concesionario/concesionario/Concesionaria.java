@@ -1,15 +1,17 @@
 package concesionario;
 
 import concesionario.exceptions.*;
+import concesionario.metodos.*;
 import java.util.ArrayList;
 import java.util.OptionalInt;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
-public class Concesionaria {
+public class Concesionaria implements Metodos{
 
     private ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
 
+    @Override
     public void agregarVehiculo(Vehiculo nuevoVehiculo) {
         try {
             if (listaVehiculos == null) {
@@ -57,6 +59,7 @@ public class Concesionaria {
         }
     }
 
+    @Override
     public void buscarVehiculo(String patenteBuscada) {
         try {
             if (listaVehiculos == null) {
@@ -83,6 +86,7 @@ public class Concesionaria {
         }
     }
 
+    @Override
     public void eliminarVehiculo(String patente) {
         try {
             if (listaVehiculos == null) {

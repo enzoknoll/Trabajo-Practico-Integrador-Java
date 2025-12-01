@@ -7,6 +7,7 @@ public class Main {
         
         // 1. Instanciamos la clase que tiene la lógica (la "Gestora")
         Concesionaria vehiculo = new Concesionaria();
+        Taller taller = new Taller();
 
         Scanner scanner = new Scanner(System.in);
 
@@ -76,10 +77,8 @@ public class Main {
 
         while (true){
             Menu.mostrarMenu();
-            System.out.print("Seleccione una opción del menú: ");
-            int opcion = Integer.parseInt(scanner.nextLine());
             try {
-                switch (opcion) {
+                switch (scanner.nextInt()) {
                 case 1:
                     Vehiculo nuevoVehiculo = pedirDatosVehiculo(scanner);
                     vehiculo.agregarVehiculo(nuevoVehiculo);
@@ -90,15 +89,10 @@ public class Main {
                     vehiculo.mostrarVehiculos();
                     continue;
                 case 3:
-                    //System.out.print("Ingrese año para buscar: ");
-                    //int anio = Integer.parseInt(scanner.nextLine());
-                    //vehiculo.buscarVehiculosPorAnio(anio);
-                    //continue;
-                case 4:
                     System.out.print("Ingrese patente para buscar: ");
                     vehiculo.buscarVehiculo(scanner.next().toUpperCase());
                     continue;
-                case 5:
+                case 4:
                     System.out.print("Ingrese la patente del vehiculo que quiere modificar: ");
                     String patenteModificada = scanner.nextLine().toUpperCase();
 
@@ -107,10 +101,13 @@ public class Main {
                     vehiculo.actualizarVehiculo(patenteModificada, VehiculoModificado);
                     vehiculo.mostrarVehiculos();
                     continue;
-                case 6:
+                case 5:
                     System.out.print("Ingrese patente del vehiculo a eliminar: ");
                     vehiculo.eliminarVehiculo(scanner.nextLine().toUpperCase());
                     vehiculo.mostrarVehiculos();
+                    continue;
+                case 6:
+                    menuTaller(scanner, vehiculo, taller);
                     continue;
                 case 7:
                     System.out.println("Saliendo del programa.");
@@ -121,7 +118,7 @@ public class Main {
                 }
                 break; // Salir del bucle si la opción es 6
             } catch (Exception e) {
-                System.out.print("Entrada inválida. Por favor, seleccione una opción del menú: ");
+                System.out.println("Entrada inválida. Por favor, seleccione una opción del menú: ");
                 scanner.next(); // Limpiar el buffer de entrada
             }
         }
@@ -136,7 +133,11 @@ public class Main {
         
         System.out.print("Ingrese un vehiculo nuevo: ");
         int tipoVehiculo = scanner.nextInt();
-        scanner.nextLine(); // <--- IMPORTANTE: Limpiar buffer después de nextInt()
+        scanner.nextLine(); // Se limpia el buffer del scanner
+        if (tipoVehiculo == 4){
+            System.out.println("Volviendo al menú principal");
+            return null;
+        }
         
         System.out.print("Ingrese marca del vehiculo: ");
         String marca = scanner.nextLine();
@@ -181,6 +182,53 @@ public class Main {
             default:
                 System.out.println("Tipo de vehículo inválido. Se cancelará la operación.");
                 return null;
+        }        
+    }
+
+    public static void menuTaller(Scanner scanner, Concesionaria vehiculo, Taller taller) {
+        Auto vehiculoTaller = new Auto("Toyota", "Corolla", 2022, true, "Blanco", "AC515GH", "Sedan");
+        taller.agregarVehiculo(vehiculoTaller);
+        while (true){
+            Menu.mostrarMenuTaller();
+            try{
+                switch(scanner.nextInt()){
+                    case 1:
+                        Vehiculo nuevoVehiculo = pedirDatosVehiculo(scanner);
+                        taller.agregarVehiculo(nuevoVehiculo);
+                        System.out.println("Vehículo agregado al taller exitosamente.");
+                        continue;
+                    case 2:
+                        taller.mostrarVehiculos();
+                        continue;
+                    case 3:
+                        System.out.print("Ingrese patente del vehiculo a buscar: ");
+                        taller.buscarVehiculo(scanner.next());
+                        continue;
+                    case 4:
+                        taller.cantidadEnEspera();
+                        continue;
+                    case 5:
+                        System.out.print("Ingrese patente del vehiculo a eliminar: ");
+                        taller.eliminarVehiculo(scanner.next());
+                        continue;
+                    case 6:
+                        taller.verProximoTurno();
+                        continue;
+                    case 7:
+                        taller.atenderSiguienteVehiculo(vehiculo);
+                        continue;
+                    case 8:
+                        System.out.println("Volviendo al menú principal");
+                        break;
+                    default:
+                        System.out.println("Opción inválida. Por favor, seleccione una opción del menú.");
+                        break;
+                }
+                break;
+            } catch (Exception e){
+                System.out.print("Ingrese un número válido del 1 al 7: "+ e.getMessage());
+                scanner.next(); // Limpiar el buffer de entrada
+            }
         }
     }
 
