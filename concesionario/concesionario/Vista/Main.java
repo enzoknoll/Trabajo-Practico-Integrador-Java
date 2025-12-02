@@ -2,13 +2,9 @@ package concesionario.vista;
 
 import java.util.Scanner;
 
-import concesionario.modelo.Auto;
-import concesionario.modelo.Camioneta;
-import concesionario.modelo.Moto;
-import concesionario.modelo.Vehiculo;
-import concesionario.modelo.Moto.TipoMoto;
-import concesionario.negocio.Concesionaria;
-import concesionario.negocio.Taller;;
+import concesionario.modelo.*;
+import concesionario.negocio.*;
+import concesionario.utilidades.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,66 +14,14 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        // Autos
-        Auto miAuto = new Auto("Toyota", "Corolla", 2022, true, "Blanco", "AA111BB", Auto.TipoCarroceria.SEDAN);
-        Auto miAuto2 = new Auto("Chevrolet", "Cruze", 2020, true, "Azul", "AA333CC", Auto.TipoCarroceria.SEDAN);
-        Auto miAuto3 = new Auto("Volkswagen", "Golf", 2021, true, "Rojo", "AA555DD", Auto.TipoCarroceria.HATCHBACK);
-        Auto miAuto4 = new Auto("Nissan", "Sentra", 2022, true, "Negro", "AA777EE", Auto.TipoCarroceria.SEDAN);
-
-        // Taller
-        Auto vehiculoTaller = new Auto("Toyota", "Corolla", 2022, true, "Blanco", "AC515GH", Auto.TipoCarroceria.SEDAN);
-        taller.agregarVehiculo(vehiculoTaller);
-        taller.agregarVehiculo(miAuto);
-
-        // Motos
-        Moto miMoto = new Moto("Honda", "CBR", 2023, true, "Rojo", "MOTO999", TipoMoto.DEPORTIVA);
-        Moto miMoto2 = new Moto("Yamaha", "YZF-R3", 2022, true, "Blanco", "MOTO888", TipoMoto.DEPORTIVA);
-        Moto miMoto3 = new Moto("Kawasaki", "Ninja 400", 2023, true, "Verde", "MOTO777", TipoMoto.TOURING);
-        Moto miMoto4 = new Moto("Ducati", "Panigale V2", 2024, true, "Rojo", "MOTO666", TipoMoto.DEPORTIVA);
-
-        // Camionetas
-        Camioneta miCamioneta = new Camioneta("Ford", "Raptor", 2021, false, "Negro", "CC222DD", Camioneta.TipoCarroceria.TRACCION_4X4);
-        Camioneta miCamioneta2 = new Camioneta("Toyota", "Hilux", 2019, false, "Gris", "CC444EE", Camioneta.TipoCarroceria.TRACCION_4X4);
-        Camioneta miCamioneta3 = new Camioneta("Chevrolet", "Silverado", 2020, false, "Blanco", "CC666FF", Camioneta.TipoCarroceria.PICKUP);
-        Camioneta miCamioneta4 = new Camioneta("Ram", "1500", 2021, false, "Azul", "CC888GG", Camioneta.TipoCarroceria.PICKUP);
-
-        // PRUEBA DEL CRUD
-
-        // A) AGREGAR (CREATE)
-        System.out.println("--- AGREGANDO VEHÍCULOS ---");
-        vehiculo.agregarVehiculo(miAuto);
-        vehiculo.agregarVehiculo(miAuto2);
-        vehiculo.agregarVehiculo(miAuto3);
-        vehiculo.agregarVehiculo(miAuto4);
-        vehiculo.agregarVehiculo(miMoto);
-        vehiculo.agregarVehiculo(miMoto2);
-        vehiculo.agregarVehiculo(miMoto3);
-        vehiculo.agregarVehiculo(miMoto4);        
-        vehiculo.agregarVehiculo(miCamioneta);
-        vehiculo.agregarVehiculo(miCamioneta2);
-        vehiculo.agregarVehiculo(miCamioneta3);
-        vehiculo.agregarVehiculo(miCamioneta4);
-
-        // B) BUSCAR (READ)
-        System.out.println("\n--- BUSCANDO ---");
-        vehiculo.buscarVehiculo("AA111BB");
-        vehiculo.buscarVehiculo("MOTO999");
-
-        // C) ACTUALIZAR (UPDATE)
-        System.out.println("\n--- ACTUALIZANDO ---");
-        Moto motoActualizada = new Moto("Honda", "CBR Fireblade", 2024, true, "Azul", "MOTO999", TipoMoto.DUAL_SPORT);
+        // 2. CARGA DE DATOS DESDE TXT
+        System.out.println("Iniciando carga de datos...");
         
-        vehiculo.actualizarVehiculo("MOTO999", motoActualizada);
+        // Asegúrate de que los archivos .txt estén en la carpeta raíz del proyecto
+        CargaDatos.cargarConcesionaria("Trabajo-Practico-Integrador-Java/vehiculos_concesionaria.txt", vehiculo);
+        CargaDatos.cargarTaller("Trabajo-Practico-Integrador-Java/vehiculos_taller.txt", taller);
         
-        // Verificamos el cambio buscando de nuevo
-        vehiculo.buscarVehiculo("MOTO999");
-
-        // D) ELIMINAR (DELETE)
-        System.out.println("\n--- ELIMINANDO ---");
-        vehiculo.eliminarVehiculo("CC222DD");
-        
-        // Intentamos buscarla para confirmar que ya no está
-        vehiculo.buscarVehiculo("CC222DD");
+        System.out.println("\nSistema inicializado correctamente.\n");
 
         while (true){
             Menu.mostrarMenu();
@@ -186,9 +130,9 @@ public class Main {
                         return new Auto(marca, modelo, anio, esNuevo, color, patente, carroceria);
                     case 2:
                         System.out.print("Ingrese tipo de moto (DEPORTIVA | CRUISER | TOURING | ESTANDAR | DUAL_SPORT): ");
-                        String tipoMotoInput = scanner.nextLine().toUpperCase();
-                        TipoMoto tipoMoto = TipoMoto.valueOf(tipoMotoInput);
-                        return new Moto(marca, modelo, anio, esNuevo, color, patente, tipoMoto);
+                        String TipoMotoInput = scanner.nextLine().toUpperCase();
+                        Moto.TipoMoto TipoMoto = Moto.TipoMoto.valueOf(TipoMotoInput);
+                        return new Moto(marca, modelo, anio, esNuevo, color, patente, TipoMoto);
                     case 3:
                         System.out.print("Ingrese tipo de camioneta (PICKUP | TRACCION_4X4 | SUV | VAN | CROSSOVER): ");
                         String carroceriaCamionetaInput = scanner.nextLine().toUpperCase();

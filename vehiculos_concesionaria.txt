@@ -1,0 +1,10 @@
+AUTO,Toyota,Corolla,2023,true,Blanco,AD123BC,SEDAN
+MOTO,Honda,CBR 600,2021,false,Rojo,123ERT,DEPORTIVA
+CAMIONETA,Ford,Ranger,2023,true,Azul,AE999ZZ,PICKUP
+AUTO,Volkswagen,Gol,2018,false,Gris,AC456DD,Hatchback
+MOTO,Yamaha,MT-03,2020,false,Negro,456YUI,ESTANDAR
+CAMIONETA,Toyota,SW4,2019,false,Blanco,AD555EE,SUV
+AUTO,Ford,Mustang,2022,true,Negro,AF001AA,COUPE
+MOTO,Kawasaki,Versys,2022,true,Verde,789OPQ,TOURING
+CAMIONETA,Jeep,Renegade,2021,false,Naranja,AE777BB,SUV
+AUTO,Fiat,500,2017,false,Rojo,AB111CC,CONVERTIBLE
