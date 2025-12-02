@@ -76,8 +76,8 @@ public class Main {
             scanner.close();
     }
 
-    private static Vehiculo pedirDatosVehiculo(Scanner scanner, Boolean paraTaller) {
-        int anio = 0;
+    private static Vehiculo pedirDatosVehiculo(Scanner scanner, boolean paraTaller) {
+        int anio;
         Menu.mostrarMenuVehiculo();
         
         System.out.print("Ingrese un vehiculo nuevo: ");
@@ -97,7 +97,7 @@ public class Main {
         while (true) {
             try {
                 System.out.print("Ingrese año del vehiculo: ");
-                anio = Integer.parseInt(scanner.nextLine()); 
+                anio = Integer.parseInt(scanner.nextLine()); // Usamos el método parseInt de la clase Wrapper Integer
                 break;
             } catch (NumberFormatException e) {
                 System.out.println("Error: Ingrese un año válido (solo números).");

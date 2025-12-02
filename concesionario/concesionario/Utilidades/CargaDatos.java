@@ -47,14 +47,12 @@ public class CargaDatos {
     // Método privado auxiliar para convertir texto a objeto Vehiculo
     private static Vehiculo parsearVehiculo(String linea) {
         try {
-            String[] d = linea.split(",");
-            // Formato esperado: TIPO,MARCA,MODELO,AÑO,NUEVO,COLOR,PATENTE,ENUM_SPECIFICO
-            
+            String[] d = linea.split(",");            
             String tipo = d[0].trim().toUpperCase();
             String marca = d[1].trim();
             String modelo = d[2].trim();
-            int anio = Integer.parseInt(d[3].trim());
-            boolean nuevo = Boolean.parseBoolean(d[4].trim());
+            int anio = Integer.parseInt(d[3].trim()); // Usamos el método parseInt de la clase Wrapper Integer
+            boolean nuevo = Boolean.parseBoolean(d[4].trim()); // Usamos el método parseBoolean de la clase Wrapper Boolean
             String color = d[5].trim();
             String patente = d[6].trim();
             String tipoEspecifico = d[7].trim().toUpperCase(); // Para el Enum

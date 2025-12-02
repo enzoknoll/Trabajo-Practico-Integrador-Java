@@ -77,10 +77,19 @@ public class Concesionaria implements UtilidadCrud{
             boolean encontrada = false;
             for (Vehiculo v : listaVehiculos) {
                 if (v.getPatente().equalsIgnoreCase(patenteBuscada)) {
-                    System.out.println("---------------------------");
-                    System.out.println("¡VEHÍCULO ENCONTRADO!");
-                    System.out.println(v.toString()); 
-                    System.out.println("---------------------------");
+                    String titulo = "      ¡VEHÍCULO ENCONTRADO! ";
+                    String datosVehiculo = v.toString() + " "; 
+                    
+                    int ancho = datosVehiculo.length();
+                    String padTitulo = " ".repeat(ancho - titulo.length());
+                    String borde = "═".repeat(ancho);
+
+                    System.out.println("╔" + borde + "╗");
+                    System.out.println("║" + titulo + padTitulo + "║");
+                    System.out.println("╠" + borde + "╣");
+                    System.out.println("║" + datosVehiculo + "║");
+                    System.out.println("╚" + borde + "╝");
+                encontrada = true;
                     encontrada = true;
                     break;
                 }
