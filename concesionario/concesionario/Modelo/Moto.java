@@ -1,30 +1,30 @@
-package concesionario;
+package concesionario.Modelo;
 
 //import concesionario.exceptions.*;
 //import java.util.ArrayList;
 
-public class Auto extends Vehiculo {
-    private String tipoCarroceria;
-//    private ArrayList<Auto> listaAutos = new ArrayList<>();
+public class Moto extends Vehiculo {
+    private String tipoMoto;
+//    private ArrayList<Moto> listaMotos = new ArrayList<>();
 
-    public Auto(String marca, String modelo, int anio, boolean condicionNuevo, String color, String patente, String tipoCarroceria) {
+    public Moto(String marca, String modelo, int anio, boolean condicionNuevo, String color, String patente, String tipoMoto) {
         super(marca, modelo, anio, condicionNuevo, color, patente);
-        this.tipoCarroceria = tipoCarroceria;
+        this.tipoMoto = tipoMoto;
     }
-    public String getTipoCarroceria() {
-        return tipoCarroceria;
+    public String getTipoMoto() {
+        return tipoMoto;
     }
 
-//    public void agregarAuto(Auto nuevoAuto) {
+//    public void agregarMoto(Moto nuevaMoto) {
 //        try {
-//            if (listaAutos == null) {
+//            if (listaMotos == null) {
 //                throw new NullPointerException("La lista no está inicializada.");
 //            }
-//            if (listaAutos.contains(nuevoAuto)) {
-//                throw new VehiculoDuplicadoException("La patente " + nuevoAuto.getPatente() + " ya existe.");
+//            if (listaMotos.contains(nuevaMoto)) {
+//                throw new VehiculoDuplicadoException("La patente " + nuevaMoto.getPatente() + " ya existe.");
 //            }
-//            listaAutos.add(nuevoAuto);
-//            System.out.println("Auto agregado.");
+//            listaMotos.add(nuevaMoto);
+//            System.out.println("Moto agregada.");
 //        } catch (VehiculoDuplicadoException e) {
 //            System.out.println("Aviso: " + e.getMessage());
 //        } catch (Exception e) {
@@ -32,21 +32,21 @@ public class Auto extends Vehiculo {
 //        }
 //    }
 //
-//    public void actualizarAuto(String patenteBuscada, Auto nuevosDatos) {
+//    public void actualizarMoto(String patenteBuscada, Moto nuevosDatos) {
 //        try {
-//            if (listaAutos == null) {
+//            if (listaMotos == null) {
 //                throw new NullPointerException("La lista no está inicializada.");
 //            }
 //            boolean actualizado = false;
-//            for (int i = 0; i < listaAutos.size(); i++) {
-//                Auto actual = listaAutos.get(i);
+//            for (int i = 0; i < listaMotos.size(); i++) {
+//                Moto actual = listaMotos.get(i);
 //                if (actual.getPatente().equalsIgnoreCase(patenteBuscada)) {
 //                    if (!nuevosDatos.getPatente().equalsIgnoreCase(actual.getPatente()) 
-//                        && listaAutos.contains(nuevosDatos)) {
+//                        && listaMotos.contains(nuevosDatos)) {
 //                        throw new IllegalArgumentException("No se puede actualizar: La nueva patente ya existe en otro vehículo.");
 //                    }
-//                    listaAutos.set(i, nuevosDatos);
-//                    System.out.println("Éxito: Los datos del auto " + patenteBuscada + " han sido actualizados.");
+//                    listaMotos.set(i, nuevosDatos);
+//                    System.out.println("Éxito: Los datos de la moto " + patenteBuscada + " han sido actualizados.");
 //                    actualizado = true;
 //                    break; 
 //                }
@@ -63,24 +63,24 @@ public class Auto extends Vehiculo {
 //        }
 //    }
 //
-//    public void buscarAuto(String patenteBuscada) {
+//    public void buscarMoto(String patenteBuscada) {
 //        try {
-//            if (listaAutos == null) {
+//            if (listaMotos == null) {
 //                throw new NullPointerException("La lista no está inicializada.");
 //            }
 //            boolean encontrada = false;
-//            for (Auto a : listaAutos) {
-//                if (a.getPatente().equalsIgnoreCase(patenteBuscada)) {
+//            for (Moto m : listaMotos) {
+//                if (m.getPatente().equalsIgnoreCase(patenteBuscada)) {
 //                    System.out.println("---------------------------");
 //                    System.out.println("¡VEHÍCULO ENCONTRADO!");
-//                    System.out.println(a.toString());
+//                    System.out.println(m.toString());
 //                    System.out.println("---------------------------");
 //                    encontrada = true;
 //                    break;
 //                }
 //            }
 //            if (!encontrada) {
-//                System.out.println("No se encontró ningún auto con la patente: " + patenteBuscada);
+//                System.out.println("No se encontró ninguna moto con la patente: " + patenteBuscada);
 //            }
 //        } catch (NullPointerException e) {
 //            System.out.println("Error grave: " + e.getMessage());
@@ -89,16 +89,16 @@ public class Auto extends Vehiculo {
 //        }
 //    }
 //
-//    public void eliminarAuto(String patente) {
+//    public void eliminarMoto(String patente) {
 //        try {
-//            if (listaAutos == null) {
+//            if (listaMotos == null) {
 //                throw new NullPointerException("La lista no está inicializada.");
 //            }
-//            boolean fueEliminado = listaAutos.removeIf(v -> v.getPatente().equalsIgnoreCase(patente));
+//            boolean fueEliminado = listaMotos.removeIf(v -> v.getPatente().equalsIgnoreCase(patente));
 //            if (!fueEliminado) {
 //                throw new IllegalArgumentException("No se encontró ningún vehículo con la patente: " + patente);
 //            }
-//            System.out.println("Éxito: Auto con patente " + patente + " eliminado.");
+//            System.out.println("Éxito: Moto con patente " + patente + " eliminada.");
 //        } catch (IllegalArgumentException e) {
 //            System.out.println("Aviso: " + e.getMessage());
 //        } catch (NullPointerException e) {
@@ -110,13 +110,13 @@ public class Auto extends Vehiculo {
 
     //@Override
     //public String toString() {
-    //    return "Auto{" +
+    //    return "Moto{" +
     //            "marca='" + getMarca() + '\'' +
     //            ", modelo='" + getModelo() + '\'' +
     //            ", anio=" + getAnio() +
-    //            ", condicionNuevo=" + esNuevo() +
+    //            ", 0 KM=" + esNuevo() +
     //            ", color='" + getColor() + '\'' +
-    //            ", tipoCarroceria='" + tipoCarroceria + '\'' +
+    //            ", tipoMoto='" + tipoMoto + '\'' +
     //            '}';
     //}
 
@@ -128,7 +128,7 @@ public class Auto extends Vehiculo {
                    " | Modelo: " + getModelo() +
                    " | Color: " + getColor() +
                    " | Condición: " + (esNuevo() ? "0 KM" : "Usado") +
-                   " | Tipo de carrocería: " + tipoCarroceria + " ";
+                   " | Tipo de moto: " + tipoMoto + " ";
 
         String borde = "═".repeat(linea.length());
 
@@ -136,4 +136,5 @@ public class Auto extends Vehiculo {
                "║" + linea + "║\n" +
                "╚" + borde + "╝";
     }
+
 }

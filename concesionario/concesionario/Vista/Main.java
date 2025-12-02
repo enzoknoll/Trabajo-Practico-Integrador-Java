@@ -1,6 +1,13 @@
-package concesionario;
+package concesionario.Vista;
 
 import java.util.Scanner;
+
+import concesionario.Modelo.Auto;
+import concesionario.Modelo.Camioneta;
+import concesionario.Modelo.Moto;
+import concesionario.Modelo.Vehiculo;
+import concesionario.Negocio.Concesionaria;
+import concesionario.Negocio.Taller;
 
 public class Main {
     public static void main(String[] args) {

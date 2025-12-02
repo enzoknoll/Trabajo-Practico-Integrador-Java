@@ -1,4 +1,4 @@
-package concesionario;
+package concesionario.Modelo;
 
 //import concesionario.exceptions.*;
 //import java.util.ArrayList;

@@ -1,8 +1,8 @@
-package concesionario.metodos;
+package concesionario.Utilidades;
 
-import concesionario.Vehiculo;
+import concesionario.Modelo.Vehiculo;
 
-public interface Metodos {
+public interface utilidadCrud {
 
     // CRUD para la Concesionaria y el taller
     void agregarVehiculo(Vehiculo nuevoVehiculo);

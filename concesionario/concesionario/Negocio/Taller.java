@@ -1,12 +1,13 @@
-package concesionario;
+package concesionario.Negocio;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
-import concesionario.exceptions.VehiculoDuplicadoException;
-import concesionario.metodos.*;
+import concesionario.Excepciones.VehiculoDuplicadoException;
+import concesionario.Modelo.Vehiculo;
+import concesionario.Utilidades.*;
 
-public class Taller implements Metodos { 
+public class Taller implements utilidadCrud { 
     Queue<Vehiculo> colaDeEspera = new LinkedList<>();
 
     @Override

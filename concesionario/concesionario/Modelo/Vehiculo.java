@@ -1,4 +1,4 @@
-package concesionario;
+package concesionario.Modelo;
 
 public abstract class Vehiculo {
     private String marca;

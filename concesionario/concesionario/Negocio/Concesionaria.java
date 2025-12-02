@@ -1,12 +1,14 @@
-package concesionario;
+package concesionario.Negocio;
 
-import concesionario.exceptions.*;
-import concesionario.metodos.*;
+import concesionario.Excepciones.*;
+import concesionario.Modelo.Vehiculo;
+import concesionario.Utilidades.*;
+
 import java.util.ArrayList;
 import java.util.OptionalInt;
 import java.util.stream.IntStream;
 
-public class Concesionaria implements Metodos{
+public class Concesionaria implements utilidadCrud{
 
     private ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
 
