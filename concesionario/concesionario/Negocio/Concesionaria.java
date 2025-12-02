@@ -1,8 +1,8 @@
-package concesionario.Negocio;
+package concesionario.negocio;
 
-import concesionario.Excepciones.*;
-import concesionario.Modelo.Vehiculo;
-import concesionario.Utilidades.*;
+import concesionario.modelo.Vehiculo;
+import concesionario.utilidades.*;
+import concesionario.excepciones.*;
 
 import java.util.ArrayList;
 import java.util.OptionalInt;

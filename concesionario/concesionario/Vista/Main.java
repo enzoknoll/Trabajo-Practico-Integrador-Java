@@ -1,13 +1,13 @@
-package concesionario.Vista;
+package concesionario.vista;
 
 import java.util.Scanner;
 
-import concesionario.Modelo.Auto;
-import concesionario.Modelo.Camioneta;
-import concesionario.Modelo.Moto;
-import concesionario.Modelo.Vehiculo;
-import concesionario.Negocio.Concesionaria;
-import concesionario.Negocio.Taller;
+import concesionario.modelo.Auto;
+import concesionario.modelo.Camioneta;
+import concesionario.modelo.Moto;
+import concesionario.modelo.Vehiculo;
+import concesionario.negocio.Concesionaria;
+import concesionario.negocio.Taller;;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,6 +22,11 @@ public class Main {
         Auto miAuto2 = new Auto("Chevrolet", "Cruze", 2020, true, "Azul", "AA333CC", "Sedan");
         Auto miAuto3 = new Auto("Volkswagen", "Golf", 2021, true, "Rojo", "AA555DD", "Hatchback");
         Auto miAuto4 = new Auto("Nissan", "Sentra", 2022, true, "Negro", "AA777EE", "Sedan");
+
+        // Taller
+        Auto vehiculoTaller = new Auto("Toyota", "Corolla", 2022, true, "Blanco", "AC515GH", "Sedan");
+        taller.agregarVehiculo(vehiculoTaller);
+        taller.agregarVehiculo(miAuto);
 
         // Motos
         Moto miMoto = new Moto("Honda", "CBR", 2023, true, "Rojo", "MOTO999", "Deportiva");
@@ -182,8 +187,6 @@ public class Main {
     }
 
     public static void menuTaller(Scanner scanner, Concesionaria vehiculo, Taller taller) {
-        Auto vehiculoTaller = new Auto("Toyota", "Corolla", 2022, true, "Blanco", "AC515GH", "Sedan");
-        taller.agregarVehiculo(vehiculoTaller);
         while (true){
             Menu.mostrarMenuTaller();
             try{

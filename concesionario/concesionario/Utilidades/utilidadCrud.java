@@ -1,6 +1,6 @@
-package concesionario.Utilidades;
+package concesionario.utilidades;
 
-import concesionario.Modelo.Vehiculo;
+import concesionario.modelo.Vehiculo;
 
 public interface utilidadCrud {
 

@@ -1,4 +1,4 @@
-package concesionario.Vista;
+package concesionario.vista;
 
 public class Menu {
     public static void mostrarMenu() {

@@ -1,4 +1,4 @@
-package concesionario.Excepciones;
+package concesionario.excepciones;
 
 public class VehiculoDuplicadoException extends RuntimeException {
     public VehiculoDuplicadoException(String mensaje) {
