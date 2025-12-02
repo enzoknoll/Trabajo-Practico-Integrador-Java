@@ -83,7 +83,7 @@ public class Main {
             try {
                 switch (scanner.nextInt()) {
                 case 1:
-                    Vehiculo nuevoVehiculo = pedirDatosVehiculo(scanner);
+                    Vehiculo nuevoVehiculo = pedirDatosVehiculo(scanner, false);
                     vehiculo.agregarVehiculo(nuevoVehiculo);
                     System.out.println("Vehículo agregado exitosamente.");
                     continue;
@@ -99,7 +99,7 @@ public class Main {
                     System.out.print("Ingrese la patente del vehiculo que quiere modificar: ");
                     String patenteModificada = scanner.nextLine().toUpperCase();
 
-                    Vehiculo VehiculoModificado = pedirDatosVehiculo(scanner);
+                    Vehiculo VehiculoModificado = pedirDatosVehiculo(scanner, false);
 
                     vehiculo.actualizarVehiculo(patenteModificada, VehiculoModificado);
                     vehiculo.mostrarVehiculos();
@@ -128,7 +128,7 @@ public class Main {
             scanner.close();
     }
 
-    private static Vehiculo pedirDatosVehiculo(Scanner scanner) {
+    private static Vehiculo pedirDatosVehiculo(Scanner scanner, Boolean paraTaller) {
         int anio = 0;
         Menu.mostrarMenuVehiculo(); 
         
@@ -149,18 +149,19 @@ public class Main {
         while (true) {
             try {
                 System.out.print("Ingrese año del vehiculo: ");
-                // Usar nextLine y parsear es mejor práctica que nextInt para evitar errores de buffer
                 anio = Integer.parseInt(scanner.nextLine()); 
                 break;
             } catch (NumberFormatException e) {
                 System.out.println("Error: Ingrese un año válido (solo números).");
             }
         }
-
-        System.out.print("El auto es 0 KM? (True/False): ");
-        boolean esNuevo = scanner.nextBoolean();
-        scanner.nextLine(); // <--- IMPORTANTE: Limpiar buffer después de nextBoolean()
-
+        boolean esNuevo = false;
+        if (!paraTaller) { // ingresa solo si no es para el taller
+            // Se hace la pregunta de si es 0km o no porque existe la posibilidad de que un auto usado no necesite pasar por el taller para ir a la concesionaria
+            System.out.print("El auto es 0 KM? (True/False): ");
+            esNuevo = scanner.nextBoolean();
+            scanner.nextLine(); // Limpiar el buffer del scanner
+        }
         System.out.print("Ingrese color del vehiculo: ");
         String color = scanner.nextLine();
 
@@ -192,7 +193,7 @@ public class Main {
             try{
                 switch(scanner.nextInt()){
                     case 1:
-                        Vehiculo nuevoVehiculo = pedirDatosVehiculo(scanner);
+                        Vehiculo nuevoVehiculo = pedirDatosVehiculo(scanner, true);
                         taller.agregarVehiculo(nuevoVehiculo);
                         System.out.println("Vehículo agregado al taller exitosamente.");
                         continue;
