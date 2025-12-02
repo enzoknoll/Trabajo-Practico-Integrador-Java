@@ -7,7 +7,7 @@ import concesionario.utilidades.*;
 import concesionario.modelo.Vehiculo;
 import concesionario.excepciones.*;
 
-public class Taller implements utilidadCrud { 
+public class Taller implements UtilidadCrud { 
     Queue<Vehiculo> colaDeEspera = new LinkedList<>();
 
     @Override

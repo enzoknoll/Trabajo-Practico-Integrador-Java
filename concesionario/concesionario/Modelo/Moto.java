@@ -20,19 +20,13 @@ public class Moto extends Vehiculo {
 
     @Override
     public String toString() {
-        String linea = " patente: " + getPatente() +
-                   " | Año: " + getAnio() +
-                   " | Marca: " + getMarca() +
-                   " | Modelo: " + getModelo() +
-                   " | Color: " + getColor() +
-                   " | Condición: " + (esNuevo() ? "0 KM" : "Usado") +
-                   " | Tipo de moto: " + tipoMoto + " ";
-
-        String borde = "═".repeat(linea.length());
-
-        return "╔" + borde + "╗\n" +
-               "║" + linea + "║\n" +
-               "╚" + borde + "╝";
+        return " Patente: " + getPatente() +
+            " | Año: " + getAnio() +
+            " | Marca: " + getMarca() +
+            " | Modelo: " + getModelo() +
+            " | Color: " + getColor() +
+            " | Condición: " + (esNuevo() ? "0 KM" : "Usado") +
+            " | Tipo: " + getTipoMoto() + " ";
     }
 
 }

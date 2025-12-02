@@ -2,7 +2,7 @@ package concesionario.utilidades;
 
 import concesionario.modelo.Vehiculo;
 
-public interface utilidadCrud {
+public interface UtilidadCrud {
 
     // CRUD para la Concesionaria y el taller
     void agregarVehiculo(Vehiculo nuevoVehiculo);

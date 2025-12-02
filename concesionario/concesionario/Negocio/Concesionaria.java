@@ -1,14 +1,18 @@
 package concesionario.negocio;
 
+import concesionario.modelo.Auto;
+import concesionario.modelo.Camioneta;
+import concesionario.modelo.Moto;
 import concesionario.modelo.Vehiculo;
 import concesionario.utilidades.*;
 import concesionario.excepciones.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.OptionalInt;
 import java.util.stream.IntStream;
 
-public class Concesionaria implements utilidadCrud{
+public class Concesionaria implements UtilidadCrud{
 
     private ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
 
@@ -112,9 +116,58 @@ public class Concesionaria implements utilidadCrud{
             System.out.println("No hay vehículos registrados.");
             return;
         }
+
+        // 1. Separamos los vehículos en listas temporales
+        List<Vehiculo> autos = new ArrayList<>();
+        List<Vehiculo> motos = new ArrayList<>();
+        List<Vehiculo> camionetas = new ArrayList<>();
+
         for (Vehiculo v : listaVehiculos) {
-            System.out.println(v.toString());
-            System.out.println("---------------------------");
+            if (v instanceof Auto) autos.add(v);
+            else if (v instanceof Moto) motos.add(v);
+            else if (v instanceof Camioneta) camionetas.add(v);
         }
+
+        // 2. Imprimimos cada grupo usando el método auxiliar
+        if (!autos.isEmpty()) {
+            imprimirTablaGrupo("AUTOS", autos);
+        }
+        if (!motos.isEmpty()) {
+            imprimirTablaGrupo("MOTOS", motos);
+        }
+        if (!camionetas.isEmpty()) {
+            imprimirTablaGrupo("CAMIONETAS", camionetas);
+        }
+    }
+
+    private void imprimirTablaGrupo(String titulo, List<Vehiculo> grupo) {
+        System.out.println("\n=== " + titulo + " ===");
+
+        // A. Calculamos el ancho máximo de texto para que la tabla quede recta
+        int anchoMaximo = 0;
+        for (Vehiculo v : grupo) {
+            if (v.toString().length() > anchoMaximo) {
+                anchoMaximo = v.toString().length();
+            }
+        }
+
+        // B. Dibujamos el TECHO de la tabla (una sola vez)
+        String borde = "═".repeat(anchoMaximo);
+        System.out.println("╔" + borde + "╗");
+
+        // C. Dibujamos el CONTENIDO (filas unidas)
+        for (Vehiculo v : grupo) {
+            String texto = v.toString();
+            // Calculamos relleno por si hay textos de distinto largo
+            String relleno = " ".repeat(anchoMaximo - texto.length());
+            
+            System.out.println("║" + texto + relleno + "║");
+            
+            // Opcional: Si quieres una línea divisoria fina entre items, descomenta la siguiente línea:
+            // System.out.println("╟" + "-".repeat(anchoMaximo) + "╢"); 
+        }
+
+        // D. Dibujamos el PISO de la tabla (una sola vez al final)
+        System.out.println("╚" + borde + "╝");
     }
 }
