@@ -16,6 +16,10 @@ public class Concesionaria implements UtilidadCrud{
 
     private ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
 
+    public ArrayList<Vehiculo> getListaVehiculos() {
+        return listaVehiculos;
+    } 
+
     @Override
     public void agregarVehiculo(Vehiculo nuevoVehiculo) {
         try {

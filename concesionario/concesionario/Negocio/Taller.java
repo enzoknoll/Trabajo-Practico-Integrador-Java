@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Scanner;
 
 import concesionario.utilidades.*;
-import concesionario.modelo.Auto;
-import concesionario.modelo.Camioneta;
-import concesionario.modelo.Moto;
-import concesionario.modelo.Vehiculo;
+import concesionario.modelo.*;
 import concesionario.excepciones.*;
 
 public class Taller implements UtilidadCrud { 
@@ -49,8 +47,6 @@ public class Taller implements UtilidadCrud {
         List<Vehiculo> motos = new ArrayList<>();
         List<Vehiculo> camionetas = new ArrayList<>();
 
-        // Usamos una lista auxiliar para guardar el número de turno de cada vehículo
-        // Así, si el Auto llegó 1ro y la Moto 2da, conservan esos números aunque los mostremos en tablas separadas.
         List<Integer> turnosAutos = new ArrayList<>();
         List<Integer> turnosMotos = new ArrayList<>();
         List<Integer> turnosCamionetas = new ArrayList<>();
@@ -83,7 +79,6 @@ public class Taller implements UtilidadCrud {
         }
     }
 
-    // --- MÉTODO AUXILIAR PRIVADO MEJORADO ---
     private void imprimirTablaConTurnos(String titulo, List<Vehiculo> grupo, List<Integer> turnos) {
         System.out.println("\n=== " + titulo + " ===");
 
@@ -157,33 +152,88 @@ public class Taller implements UtilidadCrud {
         }
     }
 
-    public void atenderSiguienteVehiculo(Concesionaria vehiculo) {
-        vehiculo.agregarVehiculo(colaDeEspera.peek());
-        Vehiculo atendido = colaDeEspera.poll();
+    public void atenderSiguienteVehiculo(Scanner scanner, Concesionaria vehiculo) {
+        try{
+            if (colaDeEspera == null) {
+                throw new NullPointerException();
+            }
+            boolean yaExiste = vehiculo.getListaVehiculos().stream().anyMatch(v -> v.getPatente().equalsIgnoreCase(colaDeEspera.peek().getPatente()));
+            if (!yaExiste){
+                vehiculo.agregarVehiculo(colaDeEspera.peek());
+                Vehiculo atendido = colaDeEspera.poll();
 
-        if (atendido != null) {
-            String linea1 = " Atendiendo y despachando a: " + atendido.getMarca() + " " + atendido.getModelo() + " ";
-            String linea2 = " Patente: " + atendido.getPatente() + " ";
-            String linea3 = " ¡Vehiculo lavado y detallado para la exhibición! ";
-            String linea4 = " ¡Vehículo listo y enviado a la concesionaria para su venta! ";
+                if (atendido != null) {
+                    String linea1 = " Atendiendo y despachando a: " + atendido.getMarca() + " " + atendido.getModelo() + " ";
+                    String linea2 = " Patente: " + atendido.getPatente() + " ";
+                    String linea3 = " ¡Vehiculo lavado y detallado para la exhibición! ";
+                    String linea4 = " ¡Vehículo listo y enviado a la concesionaria para su venta! ";
 
-            int anchoMaximo = Math.max(linea1.length(), Math.max(linea2.length(), Math.max(linea3.length(), linea4.length())));
+                    int anchoMaximo = Math.max(linea1.length(), Math.max(linea2.length(), Math.max(linea3.length(), linea4.length())));
 
-            String pad1 = " ".repeat(anchoMaximo - linea1.length());
-            String pad2 = " ".repeat(anchoMaximo - linea2.length());
-            String pad3 = " ".repeat(anchoMaximo - linea3.length());
-            String pad4 = " ".repeat(anchoMaximo - linea4.length());
-            
-            String borde = "═".repeat(anchoMaximo);
+                    String pad1 = " ".repeat(anchoMaximo - linea1.length());
+                    String pad2 = " ".repeat(anchoMaximo - linea2.length());
+                    String pad3 = " ".repeat(anchoMaximo - linea3.length());
+                    String pad4 = " ".repeat(anchoMaximo - linea4.length());
 
-            System.out.println("╔" + borde + "╗");
-            System.out.println("║" + linea1 + pad1 + "║");
-            System.out.println("║" + linea2 + pad2 + "║");
-            System.out.println("║" + linea3 + pad3 + "║");
-            System.out.println("║" + linea4 + pad4 + "║");
-            System.out.println("╚" + borde + "╝");
-        } else {
-            System.out.println("No hay vehículos en espera. El taller está libre.");
+                    String borde = "═".repeat(anchoMaximo);
+
+                    System.out.println("╔" + borde + "╗");
+                    System.out.println("║" + linea1 + pad1 + "║");
+                    System.out.println("║" + linea2 + pad2 + "║");
+                    System.out.println("║" + linea3 + pad3 + "║");
+                    System.out.println("║" + linea4 + pad4 + "║");
+                    System.out.println("╚" + borde + "╝");
+                } else {
+                    System.out.println("No hay vehículos en espera. El taller está libre.");
+                }
+            } else {
+                System.out.println("El vehículo con patente " + colaDeEspera.peek().getPatente() + " ya existe en la concesionaria. No se puede atender.");
+                String linea1 = " 1 - Eliminar vehículo del taller sin atenderlo. ";
+                String linea2 = " 2 - Modificar patente. ";
+                String linea3 = " 3 - Volver al menú del taller. ";
+                int anchoMaximo = Math.max(linea1.length(), Math.max(linea2.length(), linea3.length()));
+                String pad1 = " ".repeat(anchoMaximo - linea1.length());
+                String pad2 = " ".repeat(anchoMaximo - linea2.length());
+                String pad3 = " ".repeat(anchoMaximo - linea3.length());
+                String borde = "═".repeat(anchoMaximo);
+                System.out.println("╔" + borde + "╗");
+                System.out.println("║" + linea1 + pad1 + "║");
+                System.out.println("║" + linea2 + pad2 + "║");
+                System.out.println("║" + linea3 + pad3 + "║");
+                System.out.println("╚" + borde + "╝");
+                System.out.print("Elige una opción: ");
+                switch(scanner.nextInt()){
+                    case 1:
+                        eliminarVehiculo(colaDeEspera.peek().getPatente());
+                        break;
+                    case 2:
+                        scanner.nextLine(); // Limpiar el buffer del scanner
+                        System.out.print("Ingrese nueva patente: ");
+                        String nuevaPatente = scanner.nextLine().toUpperCase();
+                        boolean existeNuevaPatente = vehiculo.getListaVehiculos().stream().anyMatch(v -> v.getPatente().equalsIgnoreCase(nuevaPatente)) ||
+                                                    colaDeEspera.stream().anyMatch(v -> v.getPatente().equalsIgnoreCase(nuevaPatente));
+                        if (!existeNuevaPatente){
+                            Vehiculo v = colaDeEspera.peek();
+                            v.setPatente(nuevaPatente);
+                            System.out.println("Patente modificada exitosamente. Ahora atendiendo el vehículo:");
+                            atenderSiguienteVehiculo(scanner, vehiculo);
+                        } else {
+                            System.out.println("La patente " + nuevaPatente + " ya existe. No se puede modificar.");
+                        }
+                        break;
+                    case 3:
+                        System.out.println("Volviendo al menú del taller.");
+                        break;
+                    default:
+                        System.out.println("Opción inválida. Volviendo al menú del taller.");
+                        break;
+                }
+                
+            }
+        } catch (NullPointerException e){
+            System.out.println("¡La cola está vacía!");
+        } catch (Exception e){
+            System.out.println("Error inesperado: " + e.getMessage());
         }
     }
 
@@ -194,7 +244,7 @@ public class Taller implements UtilidadCrud {
             System.out.println("El próximo turno es para: ");
             System.out.println(siguiente.toString());
         } else {
-            System.out.println("La cola está vacía.");
+            System.out.println("¡La cola está vacía!");
         }
     }
 

@@ -178,7 +178,7 @@ public class Main {
                         taller.verProximoTurno();
                         continue;
                     case 7:
-                        taller.atenderSiguienteVehiculo(vehiculo);
+                        taller.atenderSiguienteVehiculo(scanner, vehiculo);
                         continue;
                     case 8:
                         System.out.println("Volviendo al menú principal");
@@ -189,8 +189,7 @@ public class Main {
                 }
                 break;
             } catch (Exception e){
-                System.out.print("Ingrese un número válido del 1 al 7: "+ e.getMessage());
-                scanner.next(); // Limpiar el buffer de entrada
+                System.out.println("Ingrese un número válido del 1 al 7: "+ e.getMessage());
             }
         }
     }
