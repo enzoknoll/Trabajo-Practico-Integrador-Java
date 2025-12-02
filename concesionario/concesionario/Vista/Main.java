@@ -6,6 +6,7 @@ import concesionario.modelo.Auto;
 import concesionario.modelo.Camioneta;
 import concesionario.modelo.Moto;
 import concesionario.modelo.Vehiculo;
+import concesionario.modelo.Moto.TipoMoto;
 import concesionario.negocio.Concesionaria;
 import concesionario.negocio.Taller;;
 
@@ -18,27 +19,27 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         // Autos
-        Auto miAuto = new Auto("Toyota", "Corolla", 2022, true, "Blanco", "AA111BB", "Sedan");
-        Auto miAuto2 = new Auto("Chevrolet", "Cruze", 2020, true, "Azul", "AA333CC", "Sedan");
-        Auto miAuto3 = new Auto("Volkswagen", "Golf", 2021, true, "Rojo", "AA555DD", "Hatchback");
-        Auto miAuto4 = new Auto("Nissan", "Sentra", 2022, true, "Negro", "AA777EE", "Sedan");
+        Auto miAuto = new Auto("Toyota", "Corolla", 2022, true, "Blanco", "AA111BB", Auto.TipoCarroceria.SEDAN);
+        Auto miAuto2 = new Auto("Chevrolet", "Cruze", 2020, true, "Azul", "AA333CC", Auto.TipoCarroceria.SEDAN);
+        Auto miAuto3 = new Auto("Volkswagen", "Golf", 2021, true, "Rojo", "AA555DD", Auto.TipoCarroceria.HATCHBACK);
+        Auto miAuto4 = new Auto("Nissan", "Sentra", 2022, true, "Negro", "AA777EE", Auto.TipoCarroceria.SEDAN);
 
         // Taller
-        Auto vehiculoTaller = new Auto("Toyota", "Corolla", 2022, true, "Blanco", "AC515GH", "Sedan");
+        Auto vehiculoTaller = new Auto("Toyota", "Corolla", 2022, true, "Blanco", "AC515GH", Auto.TipoCarroceria.SEDAN);
         taller.agregarVehiculo(vehiculoTaller);
         taller.agregarVehiculo(miAuto);
 
         // Motos
-        Moto miMoto = new Moto("Honda", "CBR", 2023, true, "Rojo", "MOTO999", "Deportiva");
-        Moto miMoto2 = new Moto("Yamaha", "YZF-R3", 2022, true, "Blanco", "MOTO888", "Deportiva");
-        Moto miMoto3 = new Moto("Kawasaki", "Ninja 400", 2023, true, "Verde", "MOTO777", "Deportiva");
-        Moto miMoto4 = new Moto("Ducati", "Panigale V2", 2024, true, "Rojo", "MOTO666", "Deportiva");
+        Moto miMoto = new Moto("Honda", "CBR", 2023, true, "Rojo", "MOTO999", TipoMoto.DEPORTIVA);
+        Moto miMoto2 = new Moto("Yamaha", "YZF-R3", 2022, true, "Blanco", "MOTO888", TipoMoto.DEPORTIVA);
+        Moto miMoto3 = new Moto("Kawasaki", "Ninja 400", 2023, true, "Verde", "MOTO777", TipoMoto.TOURING);
+        Moto miMoto4 = new Moto("Ducati", "Panigale V2", 2024, true, "Rojo", "MOTO666", TipoMoto.DEPORTIVA);
 
         // Camionetas
-        Camioneta miCamioneta = new Camioneta("Ford", "Raptor", 2021, false, "Negro", "CC222DD", "4x4");
-        Camioneta miCamioneta2 = new Camioneta("Toyota", "Hilux", 2019, false, "Gris", "CC444EE", "4x4");
-        Camioneta miCamioneta3 = new Camioneta("Chevrolet", "Silverado", 2020, false, "Blanco", "CC666FF", "Pickup");
-        Camioneta miCamioneta4 = new Camioneta("Ram", "1500", 2021, false, "Azul", "CC888GG", "Pickup");
+        Camioneta miCamioneta = new Camioneta("Ford", "Raptor", 2021, false, "Negro", "CC222DD", Camioneta.TipoCarroceria.TRACCION_4X4);
+        Camioneta miCamioneta2 = new Camioneta("Toyota", "Hilux", 2019, false, "Gris", "CC444EE", Camioneta.TipoCarroceria.TRACCION_4X4);
+        Camioneta miCamioneta3 = new Camioneta("Chevrolet", "Silverado", 2020, false, "Blanco", "CC666FF", Camioneta.TipoCarroceria.PICKUP);
+        Camioneta miCamioneta4 = new Camioneta("Ram", "1500", 2021, false, "Azul", "CC888GG", Camioneta.TipoCarroceria.PICKUP);
 
         // PRUEBA DEL CRUD
 
@@ -64,7 +65,7 @@ public class Main {
 
         // C) ACTUALIZAR (UPDATE)
         System.out.println("\n--- ACTUALIZANDO ---");
-        Moto motoActualizada = new Moto("Honda", "CBR Fireblade", 2024, true, "Azul", "MOTO999", "Super Sport");
+        Moto motoActualizada = new Moto("Honda", "CBR Fireblade", 2024, true, "Azul", "MOTO999", TipoMoto.DUAL_SPORT);
         
         vehiculo.actualizarVehiculo("MOTO999", motoActualizada);
         
@@ -156,35 +157,51 @@ public class Main {
             }
         }
         boolean esNuevo = false;
-        if (!paraTaller) { // ingresa solo si no es para el taller
-            // Se hace la pregunta de si es 0km o no porque existe la posibilidad de que un auto usado no necesite pasar por el taller para ir a la concesionaria
-            System.out.print("El auto es 0 KM? (True/False): ");
-            esNuevo = scanner.nextBoolean();
-            scanner.nextLine(); // Limpiar el buffer del scanner
+        while (true) {
+            try {
+                if (!paraTaller) { // ingresa solo si no es para el taller
+                    // Se hace la pregunta de si es 0km o no porque existe la posibilidad de que un auto usado no necesite pasar por el taller para ir a la concesionaria
+                    System.out.print("El auto es 0 KM? (True/False): ");
+                    esNuevo = scanner.nextBoolean();
+                    scanner.nextLine(); // Limpiar el buffer del scanner
+                    break;
+                }
+            } catch (Exception e) {
+                System.out.println("Error: Ingrese True o False.");
+                scanner.nextLine(); // Limpiar el buffer del scanner
+            }
         }
         System.out.print("Ingrese color del vehiculo: ");
         String color = scanner.nextLine();
 
         System.out.print("Ingrese patente del vehiculo: ");
         String patente = scanner.nextLine().toUpperCase();
-
-        switch (tipoVehiculo){
-            case 1:
-                System.out.print("Ingrese carrocería del auto: ");
-                String carroceria = scanner.nextLine();
-                return new Auto(marca, modelo, anio, esNuevo, color, patente, carroceria);
-            case 2:
-                System.out.print("Ingrese tipo de moto: ");
-                String tipoMoto = scanner.nextLine();
-                return new Moto(marca, modelo, anio, esNuevo, color, patente, tipoMoto);
-            case 3:
-                System.out.print("Ingrese tipo de camioneta: ");
-                String tipoCamioneta = scanner.nextLine();
-                return new Camioneta(marca, modelo, anio, esNuevo, color, patente, tipoCamioneta);
-            default:
-                System.out.println("Tipo de vehículo inválido. Se cancelará la operación.");
-                return null;
-        }        
+        while (true){
+            try{
+                switch (tipoVehiculo){
+                    case 1:
+                        System.out.print("Ingrese carrocería del auto (SEDAN | HATCHBACK | COUPE | CONVERTIBLE): ");
+                        String carroceriaAutoInput = scanner.nextLine().toUpperCase();
+                        Auto.TipoCarroceria carroceria = Auto.TipoCarroceria.valueOf(carroceriaAutoInput);
+                        return new Auto(marca, modelo, anio, esNuevo, color, patente, carroceria);
+                    case 2:
+                        System.out.print("Ingrese tipo de moto (DEPORTIVA | CRUISER | TOURING | ESTANDAR | DUAL_SPORT): ");
+                        String tipoMotoInput = scanner.nextLine().toUpperCase();
+                        TipoMoto tipoMoto = TipoMoto.valueOf(tipoMotoInput);
+                        return new Moto(marca, modelo, anio, esNuevo, color, patente, tipoMoto);
+                    case 3:
+                        System.out.print("Ingrese tipo de camioneta (PICKUP | TRACCION_4X4 | SUV | VAN | CROSSOVER): ");
+                        String carroceriaCamionetaInput = scanner.nextLine().toUpperCase();
+                        Camioneta.TipoCarroceria tipoCamioneta = Camioneta.TipoCarroceria.valueOf(carroceriaCamionetaInput);
+                        return new Camioneta(marca, modelo, anio, esNuevo, color, patente, tipoCamioneta);
+                    default:
+                        System.out.println("Tipo de vehículo inválido. Se cancelará la operación.");
+                        return null;
+                }
+            } catch (IllegalArgumentException e){
+                System.out.println("Error: Tipo inválido. Por favor, ingrese un tipo válido.");
+            } 
+        }      
     }
 
     public static void menuTaller(Scanner scanner, Concesionaria vehiculo, Taller taller) {
