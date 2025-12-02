@@ -90,13 +90,15 @@ public class Taller implements Metodos {
         if (atendido != null) {
             String linea1 = " Atendiendo y despachando a: " + atendido.getMarca() + " " + atendido.getModelo() + " ";
             String linea2 = " Patente: " + atendido.getPatente() + " ";
-            String linea3 = " ¡Vehículo reparado y enviado a la concesionaria! ";
+            String linea3 = " ¡Vehiculo lavado y detallado para la exhibición! ";
+            String linea4 = " ¡Vehículo listo y enviado a la concesionaria para su venta! ";
 
-            int anchoMaximo = Math.max(linea1.length(), Math.max(linea2.length(), linea3.length()));
+            int anchoMaximo = Math.max(linea1.length(), Math.max(linea2.length(), Math.max(linea3.length(), linea4.length())));
 
             String pad1 = " ".repeat(anchoMaximo - linea1.length());
             String pad2 = " ".repeat(anchoMaximo - linea2.length());
             String pad3 = " ".repeat(anchoMaximo - linea3.length());
+            String pad4 = " ".repeat(anchoMaximo - linea4.length());
             
             String borde = "═".repeat(anchoMaximo);
 
@@ -104,6 +106,7 @@ public class Taller implements Metodos {
             System.out.println("║" + linea1 + pad1 + "║");
             System.out.println("║" + linea2 + pad2 + "║");
             System.out.println("║" + linea3 + pad3 + "║");
+            System.out.println("║" + linea4 + pad4 + "║");
             System.out.println("╚" + borde + "╝");
         } else {
             System.out.println("No hay vehículos en espera. El taller está libre.");
