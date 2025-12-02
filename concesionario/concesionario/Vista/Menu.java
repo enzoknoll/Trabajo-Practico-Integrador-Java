@@ -23,7 +23,7 @@ public class Menu {
     System.out.println("║ 1. Auto                          ║");
     System.out.println("║ 2. Moto                          ║");
     System.out.println("║ 3. Camioneta                     ║");
-    System.out.println("║ 4.<<═╗ Volver al menú principal  ║");
+    System.out.println("║ 4.<<═╗ Volver al menú anterior   ║");
     System.out.println("╚══════════════════════════════════╝");
     System.out.print("Seleccione una opción: ");
     }
@@ -41,6 +41,18 @@ public class Menu {
     System.out.println("║ 7. Atender proximo vehículo         ║");
     System.out.println("║ 8.<<═╗ Volver al menú principal     ║");
     System.out.println("╚═════════════════════════════════════╝");
+    System.out.print("Seleccione una opción: ");
+    }
+
+    public static void mostrarMenuActualizarVehiculo() {
+    System.out.println("╔══════════════════════════════════╗");
+    System.out.println("║     MENÚ ACTUALIZAR VEHICULO     ║");
+    System.out.println("╠══════════════════════════════════╣");
+    System.out.println("║ 1. Auto                          ║");
+    System.out.println("║ 2. Moto                          ║");
+    System.out.println("║ 3. Camioneta                     ║");
+    System.out.println("║ 4.<<═╗ Volver al menú anterior   ║");
+    System.out.println("╚══════════════════════════════════╝");
     System.out.print("Seleccione una opción: ");
     }
 }

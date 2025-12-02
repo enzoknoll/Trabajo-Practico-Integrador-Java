@@ -28,9 +28,11 @@ public class Main {
             try {
                 switch (scanner.nextInt()) {
                 case 1:
-                    Vehiculo nuevoVehiculo = pedirDatosVehiculo(scanner, false);
-                    vehiculo.agregarVehiculo(nuevoVehiculo);
-                    System.out.println("Vehículo agregado exitosamente.");
+                    Vehiculo nuevoVehiculo = pedirDatosVehiculo(scanner, false, false);
+                    if (nuevoVehiculo != null) {
+                        vehiculo.agregarVehiculo(nuevoVehiculo);
+                        System.out.println("Vehículo agregado exitosamente.");
+                    }
                     continue;
                 case 2:
                     System.out.print("\n================================ Lista de vehículos =====================================\n");
@@ -46,7 +48,7 @@ public class Main {
                     System.out.print("Ingrese la patente del vehiculo que quiere modificar: ");
                     String patenteModificada = scanner.nextLine().toUpperCase();
 
-                    Vehiculo VehiculoModificado = pedirDatosVehiculo(scanner, false);
+                    Vehiculo VehiculoModificado = pedirDatosVehiculo(scanner, false, true);
 
                     vehiculo.actualizarVehiculo(patenteModificada, VehiculoModificado);
                     vehiculo.mostrarVehiculos();
@@ -76,18 +78,30 @@ public class Main {
             scanner.close();
     }
 
-    private static Vehiculo pedirDatosVehiculo(Scanner scanner, boolean paraTaller) {
+    private static Vehiculo pedirDatosVehiculo(Scanner scanner, boolean paraTaller, boolean esActualizacion) {
         int anio;
-        Menu.mostrarMenuVehiculo();
-        
-        System.out.print("Ingrese un vehiculo nuevo: ");
-        int tipoVehiculo = scanner.nextInt();
-        scanner.nextLine(); // Se limpia el buffer del scanner
-        if (tipoVehiculo == 4){
+        if(!esActualizacion){
+            Menu.mostrarMenuVehiculo();
+            System.out.print("Ingrese un vehiculo nuevo: ");
+        } else {
+            Menu.mostrarMenuActualizarVehiculo();
+            System.out.print("Ingrese el tipo de vehiculo a actualizar: ");
+        }
+        int tipoVehiculo;
+        while(true){
+            tipoVehiculo = scanner.nextInt();
+            scanner.nextLine(); // Se limpia el buffer del scanner
+            if (tipoVehiculo < 1 || tipoVehiculo > 4){
+                System.out.print("Opción inválida. Ingrese un número del 1 al 4: ");
+                continue;
+            } else if (tipoVehiculo == 4){
             System.out.println("Volviendo al menú principal");
             return null;
+            } else {
+                break;
+            }
         }
-        
+
         System.out.print("Ingrese marca del vehiculo: ");
         String marca = scanner.nextLine();
 
@@ -156,9 +170,11 @@ public class Main {
             try{
                 switch(scanner.nextInt()){
                     case 1:
-                        Vehiculo nuevoVehiculo = pedirDatosVehiculo(scanner, true);
-                        taller.agregarVehiculo(nuevoVehiculo);
-                        System.out.println("Vehículo agregado al taller exitosamente.");
+                        Vehiculo nuevoVehiculo = pedirDatosVehiculo(scanner, true, false);
+                        if (nuevoVehiculo != null) {
+                            taller.agregarVehiculo(nuevoVehiculo);
+                            System.out.println("Vehículo agregado al taller exitosamente.");
+                        }
                         continue;
                     case 2:
                         taller.mostrarVehiculos();
@@ -189,7 +205,8 @@ public class Main {
                 }
                 break;
             } catch (Exception e){
-                System.out.println("Ingrese un número válido del 1 al 7: "+ e.getMessage());
+                System.out.println("Entrada inválida. Por favor, seleccione una opción del menú: ");
+                scanner.next(); // Limpiar el buffer de entrada
             }
         }
     }
