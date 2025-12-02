@@ -38,9 +38,11 @@ public class Main {
                     continue;
                 case 3:
                     System.out.print("Ingrese patente para buscar: ");
-                    vehiculo.buscarVehiculo(scanner.next().toUpperCase());
+                    scanner.nextLine(); // Limpiar el buffer del scanner
+                    vehiculo.buscarVehiculo(scanner.nextLine().toUpperCase());
                     continue;
                 case 4:
+                    scanner.nextLine(); // Limpiar el buffer del scanner
                     System.out.print("Ingrese la patente del vehiculo que quiere modificar: ");
                     String patenteModificada = scanner.nextLine().toUpperCase();
 
@@ -50,6 +52,7 @@ public class Main {
                     vehiculo.mostrarVehiculos();
                     continue;
                 case 5:
+                    scanner.nextLine(); // Limpiar el buffer del scanner
                     System.out.print("Ingrese patente del vehiculo a eliminar: ");
                     vehiculo.eliminarVehiculo(scanner.nextLine().toUpperCase());
                     vehiculo.mostrarVehiculos();
@@ -75,7 +78,7 @@ public class Main {
 
     private static Vehiculo pedirDatosVehiculo(Scanner scanner, Boolean paraTaller) {
         int anio = 0;
-        Menu.mostrarMenuVehiculo(); 
+        Menu.mostrarMenuVehiculo();
         
         System.out.print("Ingrese un vehiculo nuevo: ");
         int tipoVehiculo = scanner.nextInt();
@@ -101,15 +104,13 @@ public class Main {
             }
         }
         boolean esNuevo = false;
-        while (true) {
+        while (true && !paraTaller) {
             try {
-                if (!paraTaller) { // ingresa solo si no es para el taller
-                    // Se hace la pregunta de si es 0km o no porque existe la posibilidad de que un auto usado no necesite pasar por el taller para ir a la concesionaria
-                    System.out.print("El auto es 0 KM? (True/False): ");
-                    esNuevo = scanner.nextBoolean();
-                    scanner.nextLine(); // Limpiar el buffer del scanner
-                    break;
-                }
+                // Se hace la pregunta de si es 0km o no porque existe la posibilidad de que un auto usado no necesite pasar por el taller para ir a la concesionaria
+                System.out.print("El auto es 0 KM? (True/False): ");
+                esNuevo = scanner.nextBoolean();
+                scanner.nextLine(); // Limpiar el buffer del scanner
+                break;
             } catch (Exception e) {
                 System.out.println("Error: Ingrese True o False.");
                 scanner.nextLine(); // Limpiar el buffer del scanner
@@ -120,6 +121,7 @@ public class Main {
 
         System.out.print("Ingrese patente del vehiculo: ");
         String patente = scanner.nextLine().toUpperCase();
+        
         while (true){
             try{
                 switch (tipoVehiculo){

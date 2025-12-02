@@ -1,6 +1,11 @@
 package concesionario.modelo;
 
-public abstract class Vehiculo {
+import java.io.Serializable;
+
+public abstract class Vehiculo implements Serializable {
+    // ID de version para la serialización
+    private static final long serialVersionUID = 1L;
+
     private String marca;
     private String modelo;
     private int anio;
@@ -8,6 +13,9 @@ public abstract class Vehiculo {
     private String color;
     private String patente; // aunque no se especifique en el TPI, se agrega el atributo patente para sobreescribir el metodo equals
     
+    public Vehiculo() {
+
+    }
 
     public Vehiculo(String marca, String modelo, int anio, boolean condicionNuevo, String color, String patente) {
         this.marca = marca;
@@ -18,6 +26,32 @@ public abstract class Vehiculo {
         this.patente = patente;
     }
 
+    // Setters
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public void setAnio(int anio) {
+        this.anio = anio;
+    }
+
+    public void setCondicionNuevo(boolean condicionNuevo) {
+        this.condicionNuevo = condicionNuevo;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void setPatente(String patente) {
+        this.patente = patente;
+    }
+
+    // Getters
     public String getMarca() {
         return marca;
     }

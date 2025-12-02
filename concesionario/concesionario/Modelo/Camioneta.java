@@ -3,10 +3,19 @@ package concesionario.modelo;
 public class Camioneta extends Vehiculo {
     private TipoCarroceria tipoCarroceria;
 
+    public Camioneta() {
+
+    }
+
     public Camioneta(String marca, String modelo, int anio, boolean condicionNuevo, String color, String patente, TipoCarroceria tipoCarroceria) {
         super(marca, modelo, anio, condicionNuevo, color, patente);
         this.tipoCarroceria = tipoCarroceria;
     }
+
+    public void setTipoCarroceria(TipoCarroceria tipoCarroceria) {
+        this.tipoCarroceria = tipoCarroceria;
+    }
+
     public TipoCarroceria getTipoCarroceria() {
         return tipoCarroceria;
     }
