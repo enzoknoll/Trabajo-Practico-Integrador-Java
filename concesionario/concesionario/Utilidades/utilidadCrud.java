@@ -8,5 +8,7 @@ public interface UtilidadCrud {
     void agregarVehiculo(Vehiculo nuevoVehiculo);
     void buscarVehiculo(String patenteBuscada);
     void eliminarVehiculo(String patente);
+    void mostrarVehiculos();
+
 
 }
