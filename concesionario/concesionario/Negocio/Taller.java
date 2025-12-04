@@ -246,7 +246,7 @@ public class Taller implements UtilidadCrud {
     }
 
     public void verProximoTurno() { // muestra el siguiente vehiculo en la cola sin sacarlo
-        Vehiculo siguiente = colaDeEspera.peek();
+        Vehiculo siguiente = colaDeEspera.peek(); // .peek() devuelve el primer elemento sin sacarlo de la cola
         
         if (siguiente != null) {
             String titulo = "      El próximo turno es para: ";

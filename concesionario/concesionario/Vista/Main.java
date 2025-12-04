@@ -78,7 +78,7 @@ public class Main {
         }
             scanner.close();
     }
-
+// Método para pedir datos de un vehículo al usuario
     private static Vehiculo pedirDatosVehiculo(Scanner scanner, boolean paraTaller, boolean esActualizacion) {
         int anio;
         if(!esActualizacion){
