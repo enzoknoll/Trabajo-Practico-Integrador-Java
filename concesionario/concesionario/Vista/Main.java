@@ -36,6 +36,7 @@ public class Main {
                     }
                     continue;
                 case 2:
+                    // Mostrar vehículos
                     System.out.print("\n================================ Lista de vehículos =====================================\n");
                     vehiculo.mostrarVehiculos();
                     continue;
@@ -45,6 +46,7 @@ public class Main {
                     vehiculo.buscarVehiculo(scanner.nextLine().toUpperCase());
                     continue;
                 case 4:
+                    // Actualizar vehículo
                     scanner.nextLine(); // Limpiar el buffer del scanner
                     System.out.print("Ingrese la patente del vehiculo que quiere modificar: ");
                     String patenteModificada = scanner.nextLine().toUpperCase();
