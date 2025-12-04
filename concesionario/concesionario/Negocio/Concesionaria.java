@@ -19,7 +19,7 @@ public class Concesionaria implements UtilidadCrud{
     public ArrayList<Vehiculo> getListaVehiculos() {
         return listaVehiculos;
     } 
-
+ //  ================ CRUD =================
     @Override
     public void agregarVehiculo(Vehiculo nuevoVehiculo) {
         try {
@@ -46,11 +46,12 @@ public class Concesionaria implements UtilidadCrud{
             OptionalInt indiceEncontrado = IntStream.range(0, listaVehiculos.size())
                 .filter(i -> listaVehiculos.get(i).getPatente().equalsIgnoreCase(patenteBuscada))
                 .findFirst();
-            if (indiceEncontrado.isPresent()) {
+            if (indiceEncontrado.isPresent()) { // función de collections
                 int indice = indiceEncontrado.getAsInt();
-                Vehiculo actual = listaVehiculos.get(indice);
+                Vehiculo actual = listaVehiculos.get(indice); //crea un objeto temporal con los datos actuales
+                 // Verifica si la nueva patente ya existe en otro vehículo
                 if (!nuevosDatos.getPatente().equalsIgnoreCase(actual.getPatente()) 
-                    && listaVehiculos.contains(nuevosDatos)) {
+                    && listaVehiculos.contains(nuevosDatos)) { // si la patente nueva es distinta a la actual y ya existe en la lista
                       throw new IllegalArgumentException("No se puede actualizar: La nueva patente ya existe en otro vehículo.");
                 }
                 listaVehiculos.set(indice, nuevosDatos);
@@ -74,14 +75,14 @@ public class Concesionaria implements UtilidadCrud{
             if (listaVehiculos == null) {
                 throw new NullPointerException("La lista no está inicializada.");
             }
-            boolean encontrada = false;
+            boolean encontrada = false; // bandera para saber si se encontró el vehículo
             for (Vehiculo v : listaVehiculos) {
                 if (v.getPatente().equalsIgnoreCase(patenteBuscada)) {
                     String titulo = "      ¡VEHÍCULO ENCONTRADO! ";
                     String datosVehiculo = v.toString() + " "; 
                     
                     int ancho = datosVehiculo.length();
-                    String padTitulo = " ".repeat(ancho - titulo.length());
+                    String padTitulo = " ".repeat(ancho - titulo.length()); // relleno para centrar el título
                     String borde = "═".repeat(ancho);
 
                     System.out.println("╔" + borde + "╗");
@@ -89,7 +90,6 @@ public class Concesionaria implements UtilidadCrud{
                     System.out.println("╠" + borde + "╣");
                     System.out.println("║" + datosVehiculo + "║");
                     System.out.println("╚" + borde + "╝");
-                encontrada = true;
                     encontrada = true;
                     break;
                 }
@@ -110,7 +110,7 @@ public class Concesionaria implements UtilidadCrud{
             if (listaVehiculos == null) {
                 throw new NullPointerException("La lista no está inicializada.");
             }
-            boolean fueEliminado = listaVehiculos.removeIf(v -> v.getPatente().equalsIgnoreCase(patente));
+            boolean fueEliminado = listaVehiculos.removeIf(v -> v.getPatente().equalsIgnoreCase(patente)); // bandera usando función de collections removeIf
             if (!fueEliminado) {
                 throw new IllegalArgumentException("No se encontró ningún vehículo con la patente: " + patente);
             }
@@ -126,7 +126,7 @@ public class Concesionaria implements UtilidadCrud{
 
     @Override
     public void mostrarVehiculos() {
-        if (listaVehiculos == null || listaVehiculos.isEmpty()) {
+        if (listaVehiculos == null || listaVehiculos.isEmpty()) {  // Si pregunta, no alcanzamos a hacer la excepción
             System.out.println("No hay vehículos registrados.");
             return;
         }

@@ -8,10 +8,10 @@ import concesionario.utilidades.*;
 
 public class Main {
     public static void main(String[] args) {
-        
+        // 1. INICIALIZACIÓN DE OBJETOS PRINCIPALES para las listas
         Concesionaria vehiculo = new Concesionaria();
         Taller taller = new Taller();
-
+        // Scanner para la entrada de datos
         Scanner scanner = new Scanner(System.in);
 
         // 2. CARGA DE DATOS DESDE TXT
@@ -23,6 +23,7 @@ public class Main {
         
         System.out.println("\nSistema inicializado correctamente.\n");
 
+        // 3. MENÚ PRINCIPAL - BUCLE INFINITO HASTA QUE EL USUARIO DECIDA SALIR
         while (true){
             Menu.mostrarMenu();
             try {
@@ -69,7 +70,7 @@ public class Main {
                     System.out.println("Opción inválida. Por favor, seleccione una opción del menú.");
                     continue;
                 }
-                break; // Salir del bucle si la opción es 6
+                break;
             } catch (Exception e) {
                 System.out.println("Entrada inválida. Por favor, seleccione una opción del menú: ");
                 scanner.next(); // Limpiar el buffer de entrada
@@ -87,7 +88,7 @@ public class Main {
             Menu.mostrarMenuActualizarVehiculo();
             System.out.print("Ingrese el tipo de vehiculo a actualizar: ");
         }
-        int tipoVehiculo;
+        int tipoVehiculo; // 1=Auto, 2=Moto, 3=Camioneta, 4=Volver
         while(true){
             tipoVehiculo = scanner.nextInt();
             scanner.nextLine(); // Se limpia el buffer del scanner
@@ -117,7 +118,7 @@ public class Main {
                 System.out.println("Error: Ingrese un año válido (solo números).");
             }
         }
-        boolean esNuevo = false;
+        boolean esNuevo = false; // inicialización por defecto
         while (true && !paraTaller) {
             try {
                 // Se hace la pregunta de si es 0km o no porque existe la posibilidad de que un auto usado no necesite pasar por el taller para ir a la concesionaria
@@ -136,13 +137,13 @@ public class Main {
         System.out.print("Ingrese patente del vehiculo: ");
         String patente = scanner.nextLine().toUpperCase();
         
-        while (true){
+        while (true){ // Bucle para manejar excepciones de tipos inválidos
             try{
                 switch (tipoVehiculo){
                     case 1:
                         System.out.print("Ingrese carrocería del auto (SEDAN | HATCHBACK | COUPE | CONVERTIBLE): ");
                         String carroceriaAutoInput = scanner.nextLine().toUpperCase();
-                        Auto.TipoCarroceria carroceria = Auto.TipoCarroceria.valueOf(carroceriaAutoInput);
+                        Auto.TipoCarroceria carroceria = Auto.TipoCarroceria.valueOf(carroceriaAutoInput); // Convertimos String a Enum de Auto
                         return new Auto(marca, modelo, anio, esNuevo, color, patente, carroceria);
                     case 2:
                         System.out.print("Ingrese tipo de moto (DEPORTIVA | CRUISER | TOURING | ESTANDAR | DUAL_SPORT): ");
@@ -163,7 +164,7 @@ public class Main {
             } 
         }      
     }
-
+// Menú específico para el Taller
     public static void menuTaller(Scanner scanner, Concesionaria vehiculo, Taller taller) {
         while (true){
             Menu.mostrarMenuTaller();
@@ -181,7 +182,7 @@ public class Main {
                         continue;
                     case 3:
                         System.out.print("Ingrese patente del vehiculo a buscar: ");
-                        taller.buscarVehiculo(scanner.next());
+                        taller.buscarVehiculo(scanner.next()); // Se usa next() porque la patente no tiene espacios
                         continue;
                     case 4:
                         taller.cantidadEnEspera();

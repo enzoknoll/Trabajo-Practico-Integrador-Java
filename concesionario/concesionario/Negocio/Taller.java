@@ -160,14 +160,14 @@ public class Taller implements UtilidadCrud {
         }
     }
 
-    public void atenderSiguienteVehiculo(Scanner scanner, Concesionaria vehiculo) {
+    public void atenderSiguienteVehiculo(Scanner scanner, Concesionaria vehiculo) { // se pasa por parametro la lista de la concesionaria para consultar si hay duplicidad
         try{
             if (colaDeEspera == null) {
                 throw new NullPointerException();
             }
-            boolean yaExiste = vehiculo.getListaVehiculos().stream().anyMatch(v -> v.getPatente().equalsIgnoreCase(colaDeEspera.peek().getPatente()));
+            boolean yaExiste = vehiculo.getListaVehiculos().stream().anyMatch(v -> v.getPatente().equalsIgnoreCase(colaDeEspera.peek().getPatente())); // .peek() devuelve el primer elemento sin sacarlo de la cola
             if (!yaExiste){
-                vehiculo.agregarVehiculo(colaDeEspera.peek());
+                vehiculo.agregarVehiculo(colaDeEspera.peek()); // se agrega el vehiculo a la concesionaria antes de sacarlo de la cola
                 Vehiculo atendido = colaDeEspera.poll();
 
                 if (atendido != null) {
@@ -215,7 +215,7 @@ public class Taller implements UtilidadCrud {
                         eliminarVehiculo(colaDeEspera.peek().getPatente());
                         break;
                     case 2:
-                        scanner.nextLine(); // Limpiar el buffer del scanner
+                        scanner.nextLine(); // Limpiar el buffer del scanner para que no haya pulsadores fantasmas
                         System.out.print("Ingrese nueva patente: ");
                         String nuevaPatente = scanner.nextLine().toUpperCase();
                         boolean existeNuevaPatente = vehiculo.getListaVehiculos().stream().anyMatch(v -> v.getPatente().equalsIgnoreCase(nuevaPatente)) ||
@@ -245,7 +245,7 @@ public class Taller implements UtilidadCrud {
         }
     }
 
-    public void verProximoTurno() {
+    public void verProximoTurno() { // muestra el siguiente vehiculo en la cola sin sacarlo
         Vehiculo siguiente = colaDeEspera.peek();
         
         if (siguiente != null) {

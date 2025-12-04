@@ -13,7 +13,7 @@ public abstract class Vehiculo implements Serializable {
     private String color;
     private String patente; // aunque no se especifique en el TPI, se agrega el atributo patente para sobreescribir el metodo equals
     
-    public Vehiculo() {
+    public Vehiculo() { // constructor vacío
 
     }
 
@@ -74,7 +74,7 @@ public abstract class Vehiculo implements Serializable {
     public String getPatente() {
         return patente;
     }
-
+    // sobreescritura de equals y hashCode basados en la patente
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

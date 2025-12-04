@@ -6,7 +6,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class CargaDatos {
+public class CargaDatos { // Clase con métodos estáticos para cargar datos desde archivos
 
     // Cargar archivo en el ArrayList de la Concesionaria
     public static void cargarConcesionaria(String ruta, Concesionaria concesionaria) {
